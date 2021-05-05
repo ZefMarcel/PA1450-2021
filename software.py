@@ -1,17 +1,11 @@
-from flask import Flask
+from flask import Flask, render_template
 import pandas as pd
 import sys
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    '''Home page function'''
-    return "HTML goes here"
-
-
 # file_name = name of the csv file as a string
-def load_csv(file_name):
+def load_csv( file_name ):
     '''Reads a csv files information and returns it as a pandas dataframe'''
     data_frame = pd.DataFrame()
 
@@ -44,6 +38,7 @@ def quick_sort(data, lowest, highest, column):
         quick_sort(data, lowest, index, column)
         quick_sort(data, index + 1, highest, column)
 
+
 # data = csv file as a pandas dataframe
 # column = what to sort by (example: Deaths)
 def sort(data, column):
@@ -55,9 +50,19 @@ def sort(data, column):
     quick_sort(data, lowest, highest, column)
     return data
 
+
 def get_values(data):
     """Picks the last and first indexes from the data"""
     return 0, len(data) - 1
 
-if __name__ == "__main__":
-    app.run()
+
+@app.route( "/" )
+def home():
+    '''Home page function'''
+    countries = load_csv( '04-21-2021.csv' )
+    return render_template( "index.html", len=len( countries ), countries = countries )
+
+# @app.route( "/home" )
+
+if __name__ == '__main__':
+    app.run( use_reloader=True, debug=True )
