@@ -1,0 +1,45 @@
+<head>
+    <style>
+        table, th, td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td{
+            padding: 5px;
+            /* text-align: left; */
+        }
+
+        tr:nth-child( even ) {
+            background-color: #ddd;
+        }
+
+        table{
+            font-family: Arial, Helvetica, sans-serif;
+            /* border-collapse: collapse; */
+            width: auto;
+            height: auto;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="table_entrances" style="overflow-x: auto;">
+        <table>
+            <tr>
+                {% for col in titles %}
+                <th>{{col}}</th>
+                {% endfor %}
+            </tr>
+            {% for row in tables %}
+            <tr>
+                {% for column in row %} 
+                <td>{{column}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+

@@ -7,15 +7,20 @@
     <title>Grupp 23</title>
 </head>
 <body>
-    {% extends "template.html" %} 
-    {% block template %} 
-
-    <h1>HOME</h1>
-    <ul>
-        {%for country in range(0, len)%}
-            <li>{{ country }}</li>
-        {%endfor%}
-    </ul>
-    {% endblock %}
+    <div class="container">
+        <h1>hej</h1>
+        <!-- {% extends "template.html" %}  -->
+        <!-- {% block template %}  -->
+    
+        <div class="table_entrances" style="overflow-x: auto; background-color:blue;">
+            <h1>HOME</h1>
+            <table id="table">
+                <thead><p>hej</p></thead>
+                <tr></tr>
+            </table>
+        </div>
+    </div>
+   
+    <!-- {% endblock %} -->
 </body>
 </html>

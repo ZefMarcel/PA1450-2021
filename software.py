@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import pandas as pd
+import numpy as np
 import sys
 
 app = Flask(__name__)
@@ -15,6 +16,7 @@ def load_csv( file_name ):
         print("A file with the name \"" + str(file_name) + "\" does not exist or is not readable")
     
     return data_frame
+
 
 def quick_sort(data, lowest, highest, column):
     """The sorting algorithm (is called from sort function)"""
@@ -56,13 +58,20 @@ def get_values(data):
     return 0, len(data) - 1
 
 
+file='04-21-2021.csv'
+tables = list(pd.read_csv( file ).values.tolist())
+titles=pd.read_csv( file ).columns.values
+# countries = pd.read_csv( file ).rows.values
+
+
 @app.route( "/" )
 def home():
     '''Home page function'''
-    countries = load_csv( '04-21-2021.csv' )
-    return render_template( "index.html", len=len( countries ), countries = countries )
+
+    return render_template( 'home.html', titles=titles, tables=tables )
+
 
 # @app.route( "/home" )
 
 if __name__ == '__main__':
-    app.run( use_reloader=True, debug=True )
+    app.run( debug=True ) 
