@@ -17,45 +17,10 @@ def load_csv( file_name ):
     
     return data_frame
 
-
-def quick_sort(data, lowest, highest, column):
-    """The sorting algorithm (is called from sort function)"""
-
-    if lowest < highest:
-        index = lowest - 1
-        pivot = data[column].iloc[highest]
-        for i in range(lowest, highest):
-            if data[column][i] <= pivot:
-                index += 1
-
-                a, b = data.iloc[index], data.iloc[i]
-
-                temp = data.iloc[index].copy()
-
-                data.iloc[index] = b
-                data.iloc[i] = temp
-
-        data.iloc[index + 1], data.iloc[highest] = data.iloc[highest], data.iloc[index + 1]
-
-        quick_sort(data, lowest, index, column)
-        quick_sort(data, index + 1, highest, column)
-
-
-# data = csv file as a pandas dataframe
-# column = what to sort by (example: Deaths)
-def sort(data, column):
-    """Calls for the sorting algorithm and returns the sorted data as a pandas dataframe when it is done"""
-    lowest, highest = get_values(data.FIPS)
-    if len(data) < 2:
-        return data
-
-    quick_sort(data, lowest, highest, column)
-    return data
-
-
-def get_values(data):
-    """Picks the last and first indexes from the data"""
-    return 0, len(data) - 1
+def sort(df, column):
+    '''Sorts the dataframe by column and returns the sorted dataframe'''
+    sorted_df = df.sort_values(by=[column])
+    return sorted_df
 
 
 file='04-21-2021.csv'
