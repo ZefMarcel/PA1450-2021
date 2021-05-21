@@ -17,11 +17,15 @@ def load_csv( file_name ):
     
     return data_frame
 
-def sort(df, column):
+def sort(dataframe, column):
     '''Sorts the dataframe by column and returns the sorted dataframe'''
-    sorted_df = df.sort_values(by=[column])
+    sorted_df = dataframe.sort_values(by=[column])
     return sorted_df
 
+def get_country(dataframe, country):
+    '''Returns a list with data about the specified country'''
+    lst = dataframe.loc[dataframe['Country_Region'] == country]
+    return lst
 
 file='04-21-2021.csv'
 tables = list(pd.read_csv( file ).values.tolist())
